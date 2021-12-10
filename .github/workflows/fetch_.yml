@@ -28,12 +28,14 @@ jobs:
         id: curl
         run: |
           content=$(curl -L "https://burghquayregistrationoffice.inis.gov.ie/Website/AMSREG/AMSRegWeb.nsf/(getAppsNear)?readform&cat=All&sbcat=All&typ=New&k=55FE1105EF583BA6372E52F4B0A15EDE&p=EFDC4F4EEA43EB71562785A6240DF4DF&_=1638960440089")
-          echo '::set-output name=data::'content
+          currentDate=`date`
+          echo '::set-output name=data::'$content
+          echo '::set-output name=date::'$currentDate
       - uses: gr2m/write-csv-file-action@v1.x
         with:
           path: data.csv
           columns: fetch_datetime, result
-          "fetch_datetime": ${{ fromJson(steps.curl.outputs.data).openIssues }}
+          "fetch_datetime": ${{ steps.stats.outputs.date }}
           "result": ${{ steps.stats.outputs.data }}
       # push updated file back to main branch
       - run: git config --local user.email "action@github.com"
