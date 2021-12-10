@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Fetch Appointments
 
 # Controls when the workflow will run
 on:
@@ -27,7 +27,7 @@ jobs:
       - name: Run a multi-line script
         id: curl
         run: |
-          content=$(curl -L https://burghquayregistrationoffice.inis.gov.ie/Website/AMSREG/AMSRegWeb.nsf/(getAppsNear)?readform&cat=All&sbcat=All&typ=New&k=55FE1105EF583BA6372E52F4B0A15EDE&p=EFDC4F4EEA43EB71562785A6240DF4DF&_=1638960440089)
+          content=$(curl -L "https://burghquayregistrationoffice.inis.gov.ie/Website/AMSREG/AMSRegWeb.nsf/(getAppsNear)?readform&cat=All&sbcat=All&typ=New&k=55FE1105EF583BA6372E52F4B0A15EDE&p=EFDC4F4EEA43EB71562785A6240DF4DF&_=1638960440089")
           echo '::set-output name=data::'content
       - uses: gr2m/write-csv-file-action@v1.x
         with:
