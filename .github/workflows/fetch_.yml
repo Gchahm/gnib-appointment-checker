@@ -35,8 +35,8 @@ jobs:
         with:
           path: data.csv
           columns: fetch_datetime, result
-          "fetch_datetime": ${{ steps.stats.outputs.date }}
-          "result": ${{ steps.stats.outputs.data }}
+          "fetch_datetime": ${{ steps.curl.outputs.date }}
+          "result": ${{ steps.curl.outputs.data }}
       # push updated file back to main branch
       - run: git config --local user.email "action@github.com"
       - run: git config --local user.name "GitHub Action"
